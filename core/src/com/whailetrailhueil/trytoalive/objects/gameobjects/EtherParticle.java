@@ -1,17 +1,13 @@
-package com.whailetrailhueil.trytoalive.objects.gameobjects;
+package com.whailetrailhueil.trytoalive.objects.gameObjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.whailetrailhueil.trytoalive.helpers.NAMES_OF_SPRITES;
 import com.whailetrailhueil.trytoalive.managment.DrawTools;
 import com.whailetrailhueil.trytoalive.managment.GameAssetManager;
 import com.whailetrailhueil.trytoalive.objects.AbstractObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by User on 15.06.2016.
@@ -47,7 +43,7 @@ public class EtherParticle extends AbstractObject {
 
     @Override
     public void render(DrawTools drawTools) {
-        if(frame != null) {
+        if(frame != null){
             drawTools.batch.draw(frame, position.x, position.y,size.x/2,size.y/2,size.x,size.y,1,1,rotation);
         }
     }

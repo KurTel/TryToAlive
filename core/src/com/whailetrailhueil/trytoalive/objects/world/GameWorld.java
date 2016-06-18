@@ -1,12 +1,8 @@
 package com.whailetrailhueil.trytoalive.objects.world;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.whailetrailhueil.trytoalive.managment.DrawTools;
 import com.whailetrailhueil.trytoalive.objects.AbstractObject;
-import com.whailetrailhueil.trytoalive.objects.gameobjects.EtherParticle;
-import com.whailetrailhueil.trytoalive.objects.gameobjects.Star;
-import com.whailetrailhueil.trytoalive.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,6 +20,8 @@ public class GameWorld extends AbstractObject {
     protected Vector2 visibleWorldLeftBottom,visibleWorldRightTop;
     protected Vector2 visibleWorld;
 
+    protected List<AbstractObject> myList;
+
     //список всех списков всех объектов
     protected List<List<? extends AbstractObject>> listOfAllTypesOfObject;
     //список частиц эфира
@@ -32,6 +30,9 @@ public class GameWorld extends AbstractObject {
     public GameWorld(Vector2 size) {
         super();
         this.size = size;
+
+        myList = new ArrayList<AbstractObject>();
+
 
         //создаём список всех списков
         listOfAllTypesOfObject = new ArrayList<List<? extends AbstractObject>>();

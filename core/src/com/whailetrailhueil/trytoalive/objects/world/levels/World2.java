@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.whailetrailhueil.trytoalive.managment.DrawTools;
 import com.whailetrailhueil.trytoalive.objects.gameObjects.EtherParticle;
-import com.whailetrailhueil.trytoalive.objects.gameObjects.Star;
 import com.whailetrailhueil.trytoalive.objects.world.GameWorld;
 
 import java.util.ArrayList;
@@ -14,12 +13,11 @@ import java.util.List;
 /**
  * Created by User on 16.06.2016.
  */
-public class World1 extends GameWorld {
+public class World2 extends GameWorld {
 
     private List<EtherParticle> etherParticles;
-    private List<Star> stars;
 
-    public World1(Vector2 size) {
+    public World2(Vector2 size) {
         super(size);
 
         //создаём список частиц
@@ -29,10 +27,9 @@ public class World1 extends GameWorld {
         listOfAllTypesOfObject.add(etherParticles);
 
         //создаём частицу и добавляем её в список частиц
-        EtherParticle etherParticle = new EtherParticle(this,new Vector2(600,600),400,0);
+        EtherParticle etherParticle = new EtherParticle(this,new Vector2(500,500),150,0);
         etherParticles.add(etherParticle);
-
-        //Star star = new Star(this,new Vector2(500,600),200);
+        myList.add(etherParticle);
     }
 
     private float timeToCheckWorldIsFull = 1f;
@@ -43,7 +40,7 @@ public class World1 extends GameWorld {
         deltaTime += delta;
         if(deltaTime >= timeToCheckWorldIsFull){
             boolean isFull = checkWorldIsFull();
-            Gdx.app.log("World1","isFull = " + isFull);
+            Gdx.app.log("World2","isFull = " + isFull);
             deltaTime=0;
         }
         super.update(delta);
@@ -65,7 +62,7 @@ public class World1 extends GameWorld {
             globalCellRandomPosition = localCellRandomPosition.add(visibleWorldLeftBottom);
             if(isInEtherParticles(globalCellRandomPosition.x,globalCellRandomPosition.y)) counter++;
         }
-        Gdx.app.log("World1","counter = " + (float)counter/1000*100 + "%");
+        Gdx.app.log("World2","counter = " + (float)counter/1000*100 + "%");
         if((float)counter/1000 > 0.8) return true;
         else return false;
 
@@ -77,8 +74,8 @@ public class World1 extends GameWorld {
         etherParticles.add(etherParticle);
     }
 
-    public void createEtherParticleRandomSize(Vector2 position, float sizeBound){
-        float etherParticleRandomSize = random.nextFloat() * sizeBound + 20f;
+    public void createEtherParticleRandomSize(Vector2 position){
+        float etherParticleRandomSize = random.nextFloat() * 80f + 20f;
         EtherParticle etherParticle = new EtherParticle(this,position,etherParticleRandomSize,0);
         etherParticles.add(etherParticle);
     }

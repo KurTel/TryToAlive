@@ -2,6 +2,7 @@ package com.whailetrailhueil.trytoalive.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
@@ -75,9 +76,9 @@ public class AbstractObject {
 
     public void render(DrawTools drawTools){
         if(frame != null) {
-            drawTools.batch.draw(frame, position.x, position.y,size.x,size.y);
+            //drawTools.batch.draw(frame, position.x, position.y,size.x,size.y);
             //Gdx.app.log("AbstractObject","try to draw frame = " + frame + " " + this);
-
+            drawTools.batch.draw(frame, position.x, position.y,size.x/2,size.y/2,size.x,size.y,1,1,rotation);
         }
     };
 
@@ -177,6 +178,9 @@ public class AbstractObject {
             //Gdx.app.log("AbstractObject","ratio = " + ratio);
             size = new Vector2(size.x, size.x * ratio);
             //Gdx.app.log("AbstractObject","size = " + size);
+            //frame.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            frame.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         }
         else
             this.frame = null;
@@ -185,10 +189,6 @@ public class AbstractObject {
     public void setCircle(Circle zoneOFTouch) {
         this.zoneOFTouch = zoneOFTouch;
     }
-
-//    public static void setAbstractObjectList(List<AbstractObject> abstractObjectList) {
-//        AbstractObject.abstractObjectList = abstractObjectList;
-//    }
 
     public void setColor(Color color) {
         this.color = color;
