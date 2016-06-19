@@ -1,9 +1,13 @@
 package com.whailetrailhueil.trytoalive.managment;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -18,16 +22,20 @@ import com.whailetrailhueil.trytoalive.helpers.Consts;
 
 public class DrawTools {
 
+    public BitmapFont font2;
     /**Singletone**/
     //private static  DrawTools instance = new DrawTools();
 
     //public          DrawTools getInstance(){return instance;};
 
-    public          Viewport viewPort;
-    public          OrthographicCamera camera;
-    public          ShapeRenderer shapeRenderer;
-    public          SpriteBatch batch;
-    public          BitmapFont bitmapFont;
+    public Viewport viewPort;
+    public OrthographicCamera camera;
+    public ShapeRenderer shapeRenderer;
+    public SpriteBatch batch;
+    public BitmapFont font;
+    public BitmapFont font12;
+
+    public FreeTypeFontGenerator generator;
 
     //float           cameraStartScale = 1f;
 
@@ -54,7 +62,18 @@ public class DrawTools {
         //создаём инструменты, которыми будем всё отрисовывать
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
-        bitmapFont = new BitmapFont();
+
+//        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/GIGI.ttf"));
+//        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+//        parameter.size = 12;
+//        font = generator.generateFont(parameter); // font size 12 pixels
+//        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+
+        //font = GameAssetManager.getInstance().get("size10.ttf", BitmapFont.class);
+
+
+        //font2 = GameAssetManager.getInstance().get("fonts/arial.ttf", BitmapFont.class);
+        Gdx.app.log("Drawtools","font = " + font);
 
         //используем нашу камеру для отрисовки спрайтов и фигур
         shapeRenderer.setProjectionMatrix(camera.combined);

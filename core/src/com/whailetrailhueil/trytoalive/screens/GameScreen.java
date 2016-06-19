@@ -3,8 +3,17 @@ package com.whailetrailhueil.trytoalive.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.whailetrailhueil.trytoalive.helpers.Consts;
@@ -49,9 +58,29 @@ public class GameScreen implements Screen {
 
         //инициализация АссетМенеджера
         GameAssetManager.create();
+
+        //было бы неплохо загружать шрифты в ассет менеджер, а оптом из него
+        FileHandleResolver resolver = new InternalFileHandleResolver();
+        GameAssetManager.getInstance().setLoader(FreeTypeFontGenerator.class,
+                new FreeTypeFontGeneratorLoader(resolver));
+        GameAssetManager.getInstance().setLoader(BitmapFont.class, ".ttf",
+                new FreetypeFontLoader(resolver));
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter size1Params = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        size1Params.fontFileName = "fonts/GIGI.ttf";
+        size1Params.fontParameters.size = 100;
+        size1Params.fontParameters.color = Color.BLACK;
+        size1Params.fontParameters.magFilter = Texture.TextureFilter.Linear;
+        size1Params.fontParameters.minFilter = Texture.TextureFilter.Linear;
+        GameAssetManager.getInstance().load("size10.ttf", BitmapFont.class, size1Params);
+        //GameAssetManager.getInstance().load("fonts/arial.ttf", BitmapFont.class);
+
+
         //загружаем наш атлас с текстурами
         GameAssetManager.getInstance().load("cosmos_atlas/cosmos.atlas", TextureAtlas.class);
         GameAssetManager.getInstance().load("ether/out/etherpar/etherParticle.atlas", TextureAtlas.class);
+        //TODO здесь могуть быть проблемы
+        //GameAssetManager.getInstance().load("fonts/GIGI.ttf",FreeTypeFontGenerator.class);
         //ждём пока атлас загрузится до конца, так как тут происходит ассинхронная загрузка вместе с выполнением кода
         GameAssetManager.getInstance().finishLoading();
 

@@ -4,4 +4,6 @@ package com.whailetrailhueil.trytoalive.helpers;
 public class Consts {
 //   МИР ПОДРАЗУМЕВАЕТСЯ КВАДРАТНЫЙ. ПОЭТОМУ НАПИСААН ОНА СТОРОНА
     public static final float WORLD_BIGGEST_SIDE = 1000F;
+    public static final String FONT_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;,{}\"´`'<>";
+
 }

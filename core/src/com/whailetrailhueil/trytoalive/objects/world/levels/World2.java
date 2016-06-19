@@ -29,7 +29,6 @@ public class World2 extends GameWorld {
         //создаём частицу и добавляем её в список частиц
         EtherParticle etherParticle = new EtherParticle(this,new Vector2(500,500),150,0);
         etherParticles.add(etherParticle);
-        myList.add(etherParticle);
     }
 
     private float timeToCheckWorldIsFull = 1f;

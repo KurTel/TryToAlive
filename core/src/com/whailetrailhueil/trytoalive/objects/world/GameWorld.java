@@ -11,7 +11,7 @@ import java.util.Random;
 //TODO короче такая тема, невозможно создав GameWorld сразу установить ввидимые границы
 //поэтому тут два варианта, либо изнохратиться и умудриться всё же их установить и создавать обхекты в конструкторе
 //либо установить позже и создавать обхекты в рендерере
-//либо установить позжи ваще забить на всё и просто не создавать обхекты дальше чем 280 от центра
+//либо установить позжt ваще забить на всё и просто не создавать обхекты дальше чем 280 от центра
 //280 это, 1080/1920 = 0.5625, 1000*0.5625 = 562.5, 562.5/2 = 281,25 в каждую сторону, такое будет расстояние от центра при разрешении 16/9
 public class GameWorld extends AbstractObject {
 
@@ -19,8 +19,6 @@ public class GameWorld extends AbstractObject {
 
     protected Vector2 visibleWorldLeftBottom,visibleWorldRightTop;
     protected Vector2 visibleWorld;
-
-    protected List<AbstractObject> myList;
 
     //список всех списков всех объектов
     protected List<List<? extends AbstractObject>> listOfAllTypesOfObject;
@@ -30,9 +28,6 @@ public class GameWorld extends AbstractObject {
     public GameWorld(Vector2 size) {
         super();
         this.size = size;
-
-        myList = new ArrayList<AbstractObject>();
-
 
         //создаём список всех списков
         listOfAllTypesOfObject = new ArrayList<List<? extends AbstractObject>>();

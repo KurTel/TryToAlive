@@ -76,6 +76,7 @@ public class DebugController implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         gameScreen.getSuperRenderer().getDrawTools().camera.zoom += amount*0.1;
+        Gdx.app.log("DebugController","camera.zoom = " + gameScreen.getSuperRenderer().getDrawTools().camera.zoom);
         return false;
     }
 }

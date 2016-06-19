@@ -1,8 +1,15 @@
 package com.whailetrailhueil.trytoalive.objects.world.levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 import com.whailetrailhueil.trytoalive.managment.DrawTools;
+import com.whailetrailhueil.trytoalive.managment.GameAssetManager;
 import com.whailetrailhueil.trytoalive.objects.gameObjects.EtherParticle;
 import com.whailetrailhueil.trytoalive.objects.world.GameWorld;
 
@@ -17,6 +24,8 @@ public class World0 extends GameWorld {
 
     private List<EtherParticle> etherParticles;
 
+    float sizeT = 100;
+
     public World0(Vector2 size) {
         super(size);
 
@@ -29,6 +38,16 @@ public class World0 extends GameWorld {
         //создаём частицу и добавляем её в список частиц
         EtherParticle etherParticle = new EtherParticle(this,new Vector2(500,500),150,0);
         etherParticles.add(etherParticle);
+
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/arial.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = (int)sizeT;
+        parameter.color = Color.GREEN;
+        font12 = generator.generateFont(parameter); // font size 12 pixels
+        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+        glyphLayout = new GlyphLayout(font12,"123123123", Color.GREEN, 1000, Align.center, true);
+
     }
 
     private float timeToCheckWorldIsFull = 1f;
@@ -39,14 +58,34 @@ public class World0 extends GameWorld {
         deltaTime += delta;
         if(deltaTime >= timeToCheckWorldIsFull){
             boolean isFull = checkWorldIsFull();
-            Gdx.app.log("World0","isFull = " + isFull);
+            //Gdx.app.log("World0","isFull = " + isFull);
             deltaTime=0;
         }
         super.update(delta);
+        //size -= delta*5;
     };
+
+
+    int i=0;
+    GlyphLayout glyphLayout;
+    BitmapFont font12;
 
     @Override
     public void render(DrawTools drawTools) {
+        if (GameAssetManager.getInstance().update() && GameAssetManager.getInstance().isLoaded("size10.ttf")) {
+            //glyphLayout = new GlyphLayout(drawTools.font,"What The Fuck is Your Doing Here", Color.GREEN, 1000, Align.center, true);
+            //Gdx.app.log("World0","glyphLayout = " + glyphLayout.width + " " + glyphLayout.height);
+            //drawTools.font.draw(drawTools.batch, glyphLayout, 0, 700);
+
+
+
+            //TextureRegion text = font12.getRegion();
+            font12.draw(drawTools.batch,glyphLayout, 0, 500);
+
+            //drawTools.batch.draw(text,200,200,300,300);
+            //drawTools.font2.draw(drawTools.batch, "WTF!!!!!", 300, 300);
+            //Gdx.app.log("World0","Try to draw text");
+        }
         super.render(drawTools);
     }
 
@@ -61,7 +100,7 @@ public class World0 extends GameWorld {
             globalCellRandomPosition = localCellRandomPosition.add(visibleWorldLeftBottom);
             if(isInEtherParticles(globalCellRandomPosition.x,globalCellRandomPosition.y)) counter++;
         }
-        Gdx.app.log("World0","counter = " + (float)counter/1000*100 + "%");
+        //Gdx.app.log("World0","counter = " + (float)counter/1000*100 + "%");
         if((float)counter/1000 > 0.8) return true;
         else return false;
 
